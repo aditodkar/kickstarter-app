@@ -1,0 +1,27 @@
+.detailsContainer {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    /* justify-content: center; */
+    /* background-color: #FAF9F8; */
+}
+
+.leftinfo {
+    margin-left: 35px;
+}
+
+.rightinfo {
+    margin-left: 55px;
+    border-right-color:  white;
+}
+
+.title, .subtitle {
+    font-weight: bold;
+}
+
+.custombtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #7DC03C;
+}
