@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Navbar from '../navbar/navbar';
 import Card from '../common/card';
 import './home.css';
-import { searchTermChanged } from '../../store/actions/searchAction';
+import Projects from '../../data/projects';
 
-class Home extends Component {
+export default class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: '',
+      projects: Projects
+    }
+  }
+
+  sortBy = (key) => {
+    this.setState({ projects: [...Projects].sort((a, b) => a[key] - b[key]) });
+  }
+
+  searchTermChanged = (event) => {
+    this.setState({ 
+      search: event.target.value,
+      projects: Projects.filter(val => val.title.toLowerCase().indexOf(this.state.search.toLowerCase()) > -1 ) 
+    })
+  }
 
   render() {
-    
-    const { searchTermChanged } = this.props;
-
     return (
       <div>
           <Navbar/>
           <div className="header">
             <div className="md-form mt-0 customsearch">
-                <input className="form-control" type="text" placeholder="Search projects" aria-label="Search" 
-                  value={this.props.search}
-                  onChange={e => searchTermChanged(e.target.value)}
+                <input className="form-control" type="text" placeholder="Search projects" aria-label="Search"
+                value={this.state.search}
+                onChange={this.searchTermChanged} 
                 />
             </div>
             <div className="buttonContainer">
@@ -27,16 +42,15 @@ class Home extends Component {
                   aria-expanded="false">Sort by </button>
 
                   <div className="dropdown-menu">
-                      <a className="dropdown-item" href="#">End time</a>
-                      <a className="dropdown-item" href="#">Percentage fund</a>
-                      <a className="dropdown-item" href="#">Number of backers</a>
+                      <a className="dropdown-item" href="#" onClick={() => this.sortBy('funded')}>Percentage fund</a>
+                      <a className="dropdown-item" href="#" onClick={() => this.sortBy('backers')}>Number of backers</a>
                   </div>
               </div>
             </div>
           </div>
           <div class="container-fluid">
             <div class="row">
-              {this.props.projects.map( (val,index) => (
+              {this.state.projects.map((val,index) => (
                 <div class="col-3">
                   <Card title={val.title} by={val.by} blurb={val.blurb} 
                   url={val.url} funded={val.funded} backers={val.backers} imgurl={index}/>
@@ -48,10 +62,3 @@ class Home extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  search: state.search.searchTerm,
-  projects: state.search.projects
-})
-
-export default connect (mapStateToProps, dispatch => ({ searchTermChanged: searchTerm => dispatch(searchTermChanged(searchTerm)) }))(Home);
