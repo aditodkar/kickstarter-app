@@ -5,7 +5,19 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-        <Home/>
+        <Home 
+        suggestions={[
+          "Alligator",
+          "Bask",
+          "Crocodilian",
+          "Death Roll",
+          "Eggs",
+          "Jaws",
+          "Reptile",
+          "Solitary",
+          "Tail",
+          "Wetlands"
+        ]}/>
     );
   }
 }
