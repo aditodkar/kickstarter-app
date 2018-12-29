@@ -76,7 +76,7 @@ export default class Home extends Component {
     if (showSuggestions && search) {
       if (filteredSuggestions.length) {
         suggestionsListComponent = (
-          <ul class="suggestions">
+          <ul className="suggestions">
             {filteredSuggestions.map((suggestion, index) => {
               let className;
 
@@ -99,8 +99,8 @@ export default class Home extends Component {
         );
       } else {
         suggestionsListComponent = (
-          <div class="no-suggestions">
-            <em>No suggestions, you"re on your own!</em>
+          <div className="no-suggestions">
+            <em>No suggestions, you're on your own!</em>
           </div>
         );
       }
@@ -121,7 +121,6 @@ export default class Home extends Component {
               <div>
                   <button className="btn btn-primary mycustom dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">Sort by </button>
-
                   <div className="dropdown-menu">
                       <a className="dropdown-item" href="#" onClick={() => this.sortBy('funded')}>Percentage fund</a>
                       <a className="dropdown-item" href="#" onClick={() => this.sortBy('backers')}>Number of backers</a>
