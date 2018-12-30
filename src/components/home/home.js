@@ -38,12 +38,15 @@ export default class Home extends Component {
 
     // Update the user input and filtered suggestions, reset the active
     // suggestion and make sure the suggestions are shown
+
+    const searchTerm = event.target.value;
+
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions,
       showSuggestions: true,
-      search: event.target.value,
-      projects: Projects.filter(val => val.title.toLowerCase().indexOf(this.state.search.toLowerCase()) > -1 ) 
+      search: searchTerm,
+      projects: Projects.filter(val => val.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ) 
     })
   }
 
@@ -58,7 +61,7 @@ export default class Home extends Component {
   };
 
   render() {
-
+    console.log(this.state.search)
     const {
       onChange,
       onClick,
@@ -67,7 +70,8 @@ export default class Home extends Component {
         activeSuggestion,
         filteredSuggestions,
         showSuggestions,
-        search
+        search,
+        // projects
       }
     } = this;
 
