@@ -1,5 +1,4 @@
 import React from 'react';
-import faker from 'faker';
 import './card.css';
 
 const Card = ({title, by, blurb, url, funded, backers, imgurl}) => (
@@ -19,7 +18,9 @@ const Card = ({title, by, blurb, url, funded, backers, imgurl}) => (
                     <p className="subtitle">Backers</p>
                 </div>
             </div>
-            <a href="#" className="btn custombtn">View Project</a>
+            <div className="buttonContainer">
+                <a href={`https://www.kickstarter.com/${url}`} className="btn custombtn">View Project</a>
+            </div>
         </div>
     </div>
 );

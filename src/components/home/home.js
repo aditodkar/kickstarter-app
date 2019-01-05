@@ -52,15 +52,52 @@ export default class Home extends Component {
 
   onClick = e => {
     // Update the user input and reset the rest of the state
-    const userInput = e.target.innerText;
+    const textboxInput = e.target.innerText;
 
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      search: userInput,
-      projects: Projects.filter(val => val.title.toLowerCase().indexOf(userInput.toLowerCase()) > -1 )
+      search: textboxInput,
+      projects: Projects.filter(val => val.title.toLowerCase().indexOf(textboxInput.toLowerCase()) > -1 )
     });
+  };
+
+  // Event fired when the user presses a key down
+  onKeyDown = e => {
+    const { activeSuggestion, filteredSuggestions } = this.state;
+
+    // const textboxInput = e.target.innerText;
+
+    // User pressed the enter key, update the input and close the
+    // suggestions
+    if (e.keyCode === 13) {
+
+      const currentInput = filteredSuggestions[activeSuggestion];
+
+      this.setState({
+        activeSuggestion: 0,
+        showSuggestions: false,
+        projects: Projects.filter(val => val.title.toLowerCase().indexOf(currentInput.toLowerCase()) > -1 ),
+        search: filteredSuggestions[activeSuggestion]
+      });
+    }
+    // User pressed the up arrow, decrement the index
+    else if (e.keyCode === 38) {
+      if (activeSuggestion === 0) {
+        return;
+      }
+
+      this.setState({ activeSuggestion: activeSuggestion - 1 });
+    }
+    // User pressed the down arrow, increment the index
+    else if (e.keyCode === 40) {
+      if (activeSuggestion - 1 === filteredSuggestions.length) {
+        return;
+      }
+
+      this.setState({ activeSuggestion: activeSuggestion + 1 });
+    }
   };
 
   render() {
@@ -120,6 +157,7 @@ export default class Home extends Component {
             <div className="md-form mt-0 customsearch">
                 <input className="form-control" type="text" placeholder="Search projects" aria-label="Search"
                 value={this.state.search}
+                onKeyDown={onKeyDown}
                 onChange={this.searchTermChanged} 
                 />
                 {suggestionsListComponent}
@@ -138,7 +176,7 @@ export default class Home extends Component {
           <div class="container-fluid">
             <div class="row">
               {this.state.projects.map((val,index) => (
-                <div class="col-3">
+                <div class="col-sm-3 col-md-3">
                   <Card title={val.title} by={val.by} blurb={val.blurb} 
                   url={val.url} funded={val.funded} backers={val.backers} imgurl={index}/>
                 </div>

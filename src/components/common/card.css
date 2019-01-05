@@ -1,27 +1,35 @@
+.card {
+    display: flex;
+    height: 100%
+}
+
 .detailsContainer {
     display: flex;
     flex-direction: row;
     padding-top: 10px;
-    /* justify-content: center; */
-    /* background-color: #FAF9F8; */
+    justify-content: space-around;
 }
 
 .leftinfo {
-    margin-left: 35px;
+    display: flex;
+    flex-direction: column;
 }
 
 .rightinfo {
-    margin-left: 55px;
-    border-right-color:  white;
+    display: flex;
+    flex-direction: column;
 }
 
 .title, .subtitle {
     font-weight: bold;
 }
 
-.custombtn {
+.buttonContainer {
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    /* position: absolute */
+}
+
+.custombtn {
     background-color: #7DC03C;
 }

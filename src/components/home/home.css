@@ -12,9 +12,8 @@
     padding: 10px;
 }
 
-.col-3 {
-    padding: 30px;
-    margin-top: 20px;
+.col-sm-3 {
+    margin-top: 35px;
 }
 
 .customsearch {
