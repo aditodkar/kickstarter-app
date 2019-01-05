@@ -52,11 +52,14 @@ export default class Home extends Component {
 
   onClick = e => {
     // Update the user input and reset the rest of the state
+    const userInput = e.target.innerText;
+
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      search: e.target.innerText
+      search: userInput,
+      projects: Projects.filter(val => val.title.toLowerCase().indexOf(userInput.toLowerCase()) > -1 )
     });
   };
 
